@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Active Search</title>
+		<!-- Include HTMX -->
+		<script src="https://unpkg.com/htmx.org@1.8.4"></script>
+		<link rel="stylesheet" href="/static/styles.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>Active Search</h1>
+			<input
+				type="text"
+				name="query"
+				hx-post="/active-search"
+				hx-trigger="keyup changed delay:200ms"
+				hx-target="#results"
+				autocomplete="off"
+				placeholder="Type to search for movies..." />
+			<div id="results">
+				<!-- Search results will be injected here -->
+			</div>
+		</div>
+	</body>
+</html>
