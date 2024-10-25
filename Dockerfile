@@ -1,16 +1,22 @@
-# Use the official Go image but specify the correct platform
-FROM --platform=linux/amd64 golang:1.23.2-alpine
+# Use an official lightweight Go image
+FROM golang:1.23.2-alpine
 
 # Set the working directory
 WORKDIR /app
 
-# Copy all files from the local directory to the container
+# Copy go.mod and go.sum files first for dependency caching
+COPY go.mod go.sum ./
+
+# Download dependencies
+RUN go mod download
+
+# Copy the rest of the application code
 COPY . .
 
 # Build the Go application
 RUN GOOS=linux GOARCH=amd64 go build -o app .
 
-# Expose port 8080
+# Expose the port
 EXPOSE 8080
 
 # Run the application
