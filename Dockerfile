@@ -10,6 +10,8 @@ COPY go.mod ./
 # Download dependencies
 RUN go mod download
 
+# Copy the static folder into the image
+COPY static/ static/
 # Copy the rest of the application code
 COPY . .
 
